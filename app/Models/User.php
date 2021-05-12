@@ -16,9 +16,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'userinfo';
     protected $fillable = [
         'name',
         'email',
+        'user_id',
         'password',
     ];
 
@@ -42,7 +44,4 @@ class User extends Authenticatable
     ];
 
 
-    public function post(){
-        return $this->hasMany('App\Models\Post');
-    }
 }

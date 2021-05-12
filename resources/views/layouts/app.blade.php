@@ -18,6 +18,44 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @include('club.userCssJs')
+    <style>
+        nav * {
+          line-height: 45.5px;
+        }
+        .cover
+        {
+          background-image: url('../img/homecover.jpg');
+          background-size: cover;
+          background-position:left;
+          height: 100vh;
+          z-index: -999;
+        }
+    
+        .div-square-content {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+    
+        }
+    
+        img {
+          vertical-align: middle;
+          border-style: none;
+        }
+    
+        .img-fluid {
+          max-width: 100%;
+        }
+    
+        .hwAuto {
+          object-fit: cover;
+        }
+    
+        .div-square {
+          position: relative !important;
+        }
+      </style>
 </head>
 <body>
     <div id="app">
@@ -46,17 +84,17 @@
                             <a class="nav-link" href="/services">services</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="/posts">Blog</a>
+                        <a class="nav-link" href="/posts">Blog</a>
                       </li>
                         <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                          <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
-                          </div>
+                        </div>
                         </li>
-                      </ul>
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -96,12 +134,12 @@
             </div>
         </nav> --}}
 
-     
+
         @include('inc.navbar')
         <main class="py-4">
             <div class="container">
         
-                @include('inc.messages')
+                {{-- @include('inc.messages') --}}
             @yield('content')
         </div>
         </main>
@@ -112,6 +150,15 @@
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });
-        </script>
+    </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>

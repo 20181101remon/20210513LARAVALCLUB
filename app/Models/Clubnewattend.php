@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Clubnewattend extends Model
 {
     use HasFactory;
+   
     // Table Name
-    protected $table="posts";
+    protected $table="news_attend_file";
 
     // Primary key 
-    public  $primaryKey="id";
+    public  $primaryKey="flow_of_file";
 
-    // TimeStemp
-    public $timestemps=true;
 
 
 }

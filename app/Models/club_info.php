@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     // Table Name
-    protected $table="posts";
+    protected $table="club_info";
 
     // Primary key 
     public  $primaryKey="id";
