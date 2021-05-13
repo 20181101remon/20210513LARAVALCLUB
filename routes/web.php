@@ -72,9 +72,11 @@ Route::delete('/clubOfplan/{id}',[ClubofplanController::class,'destroy']);
 
 // 社客紀錄
 Route::get('/clubOfclassrecord',[ClubofclassrecordController::class,'index']);
+Route::get('/clubOfclassrecord/create',[ClubofclassrecordController::class,'create']);
 Route::get('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'showALL']);
 Route::get('/clubOfclassrecord/{id}/{date}',[ClubofclassrecordController::class,'show']);
 Route::post('/clubOfclassrecord',[ClubofclassrecordController::class,'store']);
+Route::get('/clubOfclassrecord/{id}/edit',[ClubofclassrecordController::class,'edit']);
 Route::put('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'update']);
 Route::delete('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'destroy']);
 

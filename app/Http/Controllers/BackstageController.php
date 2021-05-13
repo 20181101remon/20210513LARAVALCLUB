@@ -42,7 +42,7 @@ class BackstageController extends Controller
             ->Where('role_id', '<>', "8")
             ->get();
 
-            return view('club.u_myclub')->with('club', $club);
+            return view('club.u_myclub_admin')->with('club', $club);
 
 
         // $posts = Post::where("user_id", "=",  $user_id)->get();

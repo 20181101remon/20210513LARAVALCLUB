@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 // use App\Models\club_info;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -208,8 +209,7 @@ class ClubofnewsController extends Controller
         $clubnew =Clubnew::where('flow_of_news', '=', $id)->first();
         $clubnew->delete();
 
-      
-  
+
         return redirect("clubOfnews/昭凌戲劇社")->with('success', '成功！');
     }
 }

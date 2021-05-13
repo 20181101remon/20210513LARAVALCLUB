@@ -1,26 +1,6 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  @include('club.userCssJs')
-
-  <title>publicNews</title>
-
-  <style>
-    nav * {
-      line-height: 45.5px;
-    }
-  </style>
-</head>
-
-
-<body class="bg dark">
-  @include('club.user')
-
-
+@extends('layouts.app')
+@include('inc.navbar')
+@section('content')
   <div class="m-5">
     <div class="container-fluid">
       <div class="row">
@@ -118,15 +98,5 @@
     </div>
   </div>
   </div>
-
-
-
-
-
-  @include('club.footer')
   </div>
-  
-
-</body>
-
-</html>
+  @endsection

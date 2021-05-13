@@ -5,6 +5,7 @@
   <link href="{{ asset('css/homepage.css') }}" rel="stylesheet">
   <link href="{{ asset('css/image1x1.css') }}" rel="stylesheet">
   <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/club.css') }}" rel="stylesheet">
 
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

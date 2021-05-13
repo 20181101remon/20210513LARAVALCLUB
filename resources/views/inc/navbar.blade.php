@@ -17,7 +17,7 @@
           <a class="nav-link" href="/about">about</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/services">services</a>
+          <a class="nav-link" href="/services">TGTGT</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/join">我的社團</a>
@@ -68,7 +68,7 @@
               {{ __('Logout') }}
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-             {{Session::forget('role')}} 
+            
               @csrf
             </form>
           </div>

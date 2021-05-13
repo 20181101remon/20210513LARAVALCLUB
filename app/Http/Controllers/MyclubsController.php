@@ -47,7 +47,7 @@ class MyclubsController extends Controller
         ->leftJoin($this->table1, $this->table2.'.club_id', '=',  $this->table1.'.club_id')
         ->leftJoin($this->table6, $this->table5.'.flow_of_classrecord', '=',  $this->table6.'.flow_of_classrecord')
         ->where('club_name',$id)
-        ->select('class_name','class_teacher','class_place','class_contect','pic')
+        ->select('class_name','class_teacher','class_place','class_contect','pic','date')
         ->orderBy('date', 'desc')
         ->get();
         $activity = DB::table($this->table7)
@@ -65,7 +65,8 @@ class MyclubsController extends Controller
         ->select('date','activity_name')
         ->get();
         
-        return view('club.u_myclub_more')->with('club',$club);
+        return view('club.u_myclub_more')->with('club',$club)->with('news',$news)
+        ->with('classrecord',$classrecord)->with('activity',$activity)->with('plan',$plan);
         // ->with('news',$news)
         // ->with('classrecord',$classrecord)->with('activity',$activity)->with('plan',$plan);
         

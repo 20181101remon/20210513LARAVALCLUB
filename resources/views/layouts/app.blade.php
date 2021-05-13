@@ -57,7 +57,7 @@
         }
       </style>
 </head>
-<body>
+<body class="bg">
     <div id="app">
         {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -135,7 +135,7 @@
         </nav> --}}
 
 
-        @include('inc.navbar')
+        
         <main class="py-4">
             <div class="container">
         
@@ -144,6 +144,8 @@
         </div>
         </main>
     </div>
+    
+  @include('club.footer')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'summary-ckeditor', {

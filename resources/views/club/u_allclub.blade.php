@@ -1,5 +1,5 @@
-
 @extends('layouts.app')
+@include('inc.navbar')
     <!-- body -->
     @section('content')
 

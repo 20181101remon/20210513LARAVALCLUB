@@ -1,12 +1,12 @@
-
 @extends('layouts.app')
-
+@include('inc.m_navbar')
 @section('content')
     <div class="my-3 mr-5">
         <a href="/clubOfnews/create"><img class="img-thumbnail bg-d p-3"
                 style="border-radius:10rem; border-width:0px;max-width: 60px;float: right;" src="../img/plus.png"></a>
     </div>
-    <br><br><br>
+    <div class="m-5">
+        <h5><strong>社團消息</strong></h5>
     <div class="my-3 p-5 bg-d light border border-light border-radius" style="border-radius: 10px;">
         <div class="container-fluid border border-light rounded">
         <div class="row mt-3">
@@ -38,6 +38,7 @@
               <div class="row">
                 {!!Session::put('club_id', $n->club_id)!!}
                 {!!Session::put('club_name', $n->club_name)!!}
+                {{-- {{dd($n->flow_of_news)}} --}}
                 <div class="col-5 text-center">
                 <p>{{$n->news_title}}</p>
                 </div>
@@ -82,7 +83,8 @@
                           <div>
                             {{$n->news_content}}
                           </div>
-                          <div class="image-3x4" style="background-image: url(../img/news_1.jpg);"></div>
+                          <div class="image-3x4" style="background-image: url(/storage/newpic/{{$n->news_pic}});"></div>
+                          <!-- <img  style="width:100%" src="/storage/newpic/{{$n->news_pic}}"> -->
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary button-c" data-dismiss="modal">Close</button>

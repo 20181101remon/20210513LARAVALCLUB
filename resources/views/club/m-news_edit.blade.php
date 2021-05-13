@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@include('inc.m_navbar')
 @section('content')
     <div class="m-5">
         <h5><strong>社團消息</strong></h5>
