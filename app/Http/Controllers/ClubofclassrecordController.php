@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Clubclassrecord;
-use App\Models\Classrecord_pic;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Clubclassrecord;
+use App\Models\Classrecord_pic;
 
 class ClubofclassrecordController extends Controller
 {
@@ -17,10 +18,12 @@ class ClubofclassrecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //公開的
         // $club=club_info::all();
+    
+     
         $club = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
@@ -101,6 +104,7 @@ class ClubofclassrecordController extends Controller
     public function showALL($id)
     {
         //
+        // dd("263");
         $class = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
@@ -119,6 +123,7 @@ class ClubofclassrecordController extends Controller
     public function show($id,$date)
     {
         //
+        
         $club = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
@@ -128,12 +133,18 @@ class ClubofclassrecordController extends Controller
         return $club;
     }
 
+  /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        //
+      
         $class = Clubclassrecord::find($id);
-        // return view('club.m-class_edit')->with('class', $class);
-         return $class;
+        return view('club.m-class_edit')->with('class', $class);
+        //  return $class;
     }
 
     /**
@@ -146,12 +157,41 @@ class ClubofclassrecordController extends Controller
     public function update(Request $request, $id)
     {
         //
-        dd($request->all());
-        $club=DB::table($this->table1)
-        ->where('flow_of_classrecord',$id)
-        ->update($request->all());
+        $this->validate($request, [
+            'class_name' => 'required',
+            'class_teacher' => 'required',
+            'class_place' => 'required',
+            'class_contect' => 'required',
+            'pic'=>'image|nullable'
+        ]);
+        $record =Clubclassrecord::where('flow_of_classrecord', '=', $id)->first();
+        if($request->hasFile('pic')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('pic')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('pic')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('pic')->storeAs('public/newpic/', $fileNameToStore);
+        
+        } else {
+            $fileNameToStore = '';
+        }     
 
-        return $club;
+        $record->class_name=$request->input('class_name');
+        $record->class_teacher=$request->input('class_teacher');
+        $record->class_place=$request->input('class_place');
+        $record->class_contect=$request->input('class_contect');
+        $record->date=$request->input('date');
+        $record->PLC =$request->input('PLC');
+        $record->club_semester=$request->input('club_semester');
+        $record->save();
+
+    
+        return redirect("clubOfclassrecord/$request->club_name")->with('success', '成功！');
     }
 
     /**
@@ -160,10 +200,13 @@ class ClubofclassrecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
-        $club=DB::table($this->table1)->where('flow_of_classrecord',$id)->delete();
-        return $club;
+        $clubnew =Classrecord_pic::where('flow_of_classrecord', '=', $id)->first();
+        $clubnew->delete();
+        $clubnew =Clubclassrecord::where('flow_of_classrecord', '=', $id)->first();
+        $clubnew->delete();
+        return redirect("clubOfclassrecord/$request->club_name")->with('success', '成功！');
     }
 }

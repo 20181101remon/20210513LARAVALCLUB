@@ -201,7 +201,7 @@ class ClubofnewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
         $clubnew =Clubnewattend::where('flow_of_news', '=', $id)->first();
@@ -210,6 +210,6 @@ class ClubofnewsController extends Controller
         $clubnew->delete();
 
 
-        return redirect("clubOfnews/昭凌戲劇社")->with('success', '成功！');
+        return redirect("clubOfnews/$request->club_name")->with('success', '成功！');
     }
 }

@@ -44,11 +44,9 @@
                     {{ Form::hidden('club_name',Session::get('club_name'))}}
                     {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                 </div>
-
-                
-            
             {!! Form::close() !!}
             {!! Form::open(['method' => 'DELETE','action' => ['ClubofnewsController@destroy',$news->flow_of_news], 'class' => 'pull-right']) !!}
+            {{ Form::hidden('club_name',Session::get('club_name'))}}
             {{Form ::submit('Delete',['class' => 'btn btn-danger'])}}
             {!!Form::close() !!}
 

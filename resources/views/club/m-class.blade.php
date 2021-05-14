@@ -52,14 +52,15 @@
                 <button type="button" class="btn button-c" data-toggle="modal" data-target="<?php echo "#".$modal ?>" style="border-radius: 25px;">
                 MORE
                 </button>
-                @php
-                    // dd($r->flow_of_classrecord);
-                @endphp
+                {{-- @php
+                    dd($r->flow_of_classrecord); 
+                @endphp --}}
                 <a href="/clubOfclassrecord/{{$r->flow_of_classrecord}}/edit">
                     <button type="button" class="btn button-c mx-3" style="border-radius: 25px;">
                         編輯
                     </button>
                 </a>
+                
                 <div class="modal fade c0" id="<?php echo $modal ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $modal."Title" ?>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content bg-d">

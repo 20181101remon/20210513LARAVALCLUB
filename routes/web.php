@@ -34,6 +34,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+// 社客紀錄
+Route::get('/clubOfclassrecord/{id}/edit',[ClubofclassrecordController::class,'edit']);
+Route::get('/clubOfclassrecord',[ClubofclassrecordController::class,'index']);
+Route::get('/clubOfclassrecord/create',[ClubofclassrecordController::class,'create']);
+Route::get('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'showALL']);
+Route::get('/clubOfclassrecord/{id}/{date}',[ClubofclassrecordController::class,'show']);
+Route::post('/clubOfclassrecord',[ClubofclassrecordController::class,'store']);
+
 // Laraval 8 更改寫法
 Route::get('/',[PagesController::class,'index']);
 Route::get('/about',[PagesController::class,'about']);
@@ -70,13 +79,8 @@ Route::post('/clubOfplan',[ClubofplanController::class,'store']);
 Route::put('/clubOfplan/{id}',[ClubofplanController::class,'update']);
 Route::delete('/clubOfplan/{id}',[ClubofplanController::class,'destroy']);
 
-// 社客紀錄
-Route::get('/clubOfclassrecord',[ClubofclassrecordController::class,'index']);
-Route::get('/clubOfclassrecord/create',[ClubofclassrecordController::class,'create']);
-Route::get('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'showALL']);
-Route::get('/clubOfclassrecord/{id}/{date}',[ClubofclassrecordController::class,'show']);
-Route::post('/clubOfclassrecord',[ClubofclassrecordController::class,'store']);
-Route::get('/clubOfclassrecord/{id}/edit',[ClubofclassrecordController::class,'edit']);
+
+
 Route::put('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'update']);
 Route::delete('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'destroy']);
 

@@ -65,10 +65,10 @@
                     {{-- {{dd($n->flow_of_news)}} --}}
                 
                     <!-- DEL Button trigger modal -->
-           
+
 
                         {{-- {!! Form::open(['method' => 'delete','action' => ['ClubofnewsController@destroy',$n->flow_of_news], 'class' => 'pull-right']) !!} --}}
-                       
+
 
                   <div class="modal fade c0" id="<?php echo $modal ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $modal."Title" ?>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -44,10 +44,16 @@
                 {{ Form::hidden('club_name',Session::get('club_name'))}}
                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                 {{ Form::hidden('flow_of_pic',Str::uuid()) }}
-                {{ Form::hidden('flow_of_classrecord',Str::uuid()) }}
+             
 
             </div>
             {!! Form::close() !!}
+
+            {!! Form::close() !!}
+            {!! Form::open(['method' => 'DELETE','action' => ['ClubofclassrecordController@destroy',$class->flow_of_classrecord], 'class' => 'pull-right']) !!}
+            {{ Form::hidden('club_name',Session::get('club_name'))}}
+            {{Form ::submit('Delete',['class' => 'btn btn-danger'])}}
+            {!!Form::close() !!}
     </div>
 
     </div>
