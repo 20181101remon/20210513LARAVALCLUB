@@ -4,6 +4,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ClubinfoController;
 use App\Http\Controllers\ClubofplanController;
 use App\Http\Controllers\ClubofclassrecordController;
+use App\Http\Controllers\ClubactivityController;
 use App\Http\Controllers\FinancialtableController;
 use App\Http\Controllers\CluboffeedbackController;
 use App\Http\Controllers\ClubactivityapplyController;
@@ -35,13 +36,24 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-// 社客紀錄
+// 社課紀錄
 Route::get('/clubOfclassrecord/{id}/edit',[ClubofclassrecordController::class,'edit']);
 Route::get('/clubOfclassrecord',[ClubofclassrecordController::class,'index']);
 Route::get('/clubOfclassrecord/create',[ClubofclassrecordController::class,'create']);
 Route::get('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'showALL']);
 Route::get('/clubOfclassrecord/{id}/{date}',[ClubofclassrecordController::class,'show']);
 Route::post('/clubOfclassrecord',[ClubofclassrecordController::class,'store']);
+Route::put('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'update']);
+Route::delete('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'destroy']);
+
+// 社團活動
+Route::get('/Clubactivity/{id}/edit',[ClubactivityController::class,'edit']);
+Route::get('/Clubactivity/create',[ClubactivityController::class,'create']);
+Route::get('/Clubactivity/{id}',[ClubactivityController::class,'showALL']);
+Route::get('/Clubactivity/{id}/{date}',[ClubactivityController::class,'show']);
+Route::post('/Clubactivity',[ClubactivityController::class,'store']);
+Route::put('/Clubactivity/{id}',[ClubactivityController::class,'update']);
+Route::delete('/Clubactivity/{id}',[ClubactivityController::class,'destroy']);
 
 // Laraval 8 更改寫法
 Route::get('/',[PagesController::class,'index']);
@@ -68,6 +80,7 @@ Route::get('/posts/{id}',[PostController::class,'show']);
 Route::get('/clubs',[ClubinfoController::class,'index']);
 Route::get('/clubs/create', [ClubinfoController::class,'create']);
 Route::get('/clubs/{id}', [ClubinfoController::class,'show']);
+Route::get('/clubs/{id}/edit', [ClubinfoController::class,'edit']);
 Route::post('/clubs',[ClubinfoController::class,'store']);
 Route::put('/clubs/{id}',[ClubinfoController::class,'update']);
 Route::delete('/clubs/{id}',[ClubinfoController::class,'destroy']);
@@ -81,8 +94,6 @@ Route::delete('/clubOfplan/{id}',[ClubofplanController::class,'destroy']);
 
 
 
-Route::put('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'update']);
-Route::delete('/clubOfclassrecord/{id}',[ClubofclassrecordController::class,'destroy']);
 
 // 財務表
 Route::get('/financialtable/{id}',[FinancialtableController::class,'show']);
@@ -104,7 +115,7 @@ Route::post('/activityapply',[ClubactivityapplyController::class,'store']);
 Route::put('/activityapply/{id}',[ClubactivityapplyController::class,'update']);
 Route::delete('/activityapply/{id}',[ClubactivityapplyController::class,'destroy']);
 
-// 活動成果
+// 活動成果(舊,請不要使用)
 Route::get('/activityresults',[ClubactivityresultsController::class,'index']);
 Route::get('/activityresults/{id}',[ClubactivityresultsController::class,'showALL']);
 Route::get('/activityresults/{id}/{date}',[ClubactivityresultsController::class,'show']);
@@ -115,6 +126,7 @@ Route::delete('/activityresults/{id}',[ClubactivityresultsController::class,'des
 // 最新消息
 Route::get('/clubOfnews',[ClubofnewsController::class,'index']);
 Route::get('/clubOfnews/create',[ClubofnewsController::class,'create']);
+Route::get('get-more-users', [ClubofnewsController::class,'getMoreUsers'])->name('users.get-more-users');
 Route::get('/clubOfnews/{id}',[ClubofnewsController::class,'showALL']);
 Route::get('/clubOfnews/{id}/edit',[ClubofnewsController::class,'edit']);
 Route::get('/clubOfnews/{id}/{date}',[ClubofnewsController::class,'show']);
@@ -122,7 +134,7 @@ Route::post('/clubOfnews',[ClubofnewsController::class,'store']);
 Route::put('/clubOfnews/{id}',[ClubofnewsController::class,'update']);
 Route::delete('/clubOfnews/{id}',[ClubofnewsController::class,'destroy']);
 
-// 活動成果照
+// 活動成果照(舊,請不要使用)
 Route::get('/activitypic/{id}/{date}',[ActivitypicController::class,'show']);
 Route::post('/activitypic',[ActivitypicController::class,'store']);
 Route::put('/activitypic/{id}',[ActivitypicController::class,'update']);

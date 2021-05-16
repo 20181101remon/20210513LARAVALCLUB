@@ -12,6 +12,17 @@ class CluboffeedbackController extends Controller
     private $table1='club_feedback';
     private $table2='club_info';
     private $table3='feedback_type';
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +76,8 @@ class CluboffeedbackController extends Controller
         ->leftJoin($this->table3, $this->table1.'.feedback_id', '=',  $this->table3.'.feedback_id')
         ->where('club_name',$id)
         ->get();
-        return $club;
+        // return $club;
+        return view('club.m-feedback')->with('feedback',$club);
     }
 
     /**

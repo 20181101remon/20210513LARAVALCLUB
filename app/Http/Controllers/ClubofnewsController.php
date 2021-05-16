@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Clubnew;
 use App\Models\Clubnewattend;
-
+use App\Constants\GlobalConstants;
 
 class ClubofnewsController extends Controller
 {
@@ -15,6 +15,16 @@ class ClubofnewsController extends Controller
     private $table2='club_info';
     private $table3='news_type';
     private $table4='news_attend_file';
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +32,8 @@ class ClubofnewsController extends Controller
      */
     public function index()
     {
-        //公開的
+
+   //公開的
         // $club=club_info::all();
         $club = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_id', '=',  $this->table2.'.club_id')
@@ -36,7 +47,15 @@ class ClubofnewsController extends Controller
 
         return view('club.u_publicnews')->with('clubnews', $club)->with('types', $type);
         // 傳過去時要使用的變數名稱 變數
-    }
+
+                // return view('club.u_publicnews')->with('clubnews', $club);
+        // 傳過去時要使用的變數名稱 變數
+    
+        }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,6 +82,7 @@ class ClubofnewsController extends Controller
             'news_content' => 'required',
             'news_pic'=>'image|nullable'
         ]);
+        
         $clubnew = new Clubnew;
         $clubnew->flow_of_news =$request->input('flow_of_news');
         $clubnew->news_title=$request->input('news_title');
@@ -201,7 +221,7 @@ class ClubofnewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
         //
         $clubnew =Clubnewattend::where('flow_of_news', '=', $id)->first();
@@ -210,6 +230,6 @@ class ClubofnewsController extends Controller
         $clubnew->delete();
 
 
-        return redirect("clubOfnews/$request->club_name")->with('success', '成功！');
+        return redirect("clubOfnews/昭凌戲劇社")->with('success', '成功！');
     }
 }

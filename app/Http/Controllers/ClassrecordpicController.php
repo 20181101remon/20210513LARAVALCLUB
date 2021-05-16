@@ -11,6 +11,18 @@ class ClassrecordpicController extends Controller
     private $table2 = 'club_semester';
     private $table3 = 'club_info';
     private $table4 = 'classrecord_pic';
+
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *

@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Clubclassrecord;
-use App\Models\Classrecord_pic;
+use App\Models\Clubactivity;
 
-class ClubofclassrecordController extends Controller
+
+class ClubactivityController extends Controller
 {
-    private $table1='club_classrecord';
+    private $table1='club_activity';
     private $table2='club_semester';
     private $table3='club_info';
-    private $table4='classrecord_pic';
 
         /**
      * Create a new controller instance.
@@ -35,23 +34,22 @@ class ClubofclassrecordController extends Controller
         // $club=club_info::all();
     
      
-        $club = DB::table($this->table1)
-        ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
-        ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
-        ->leftJoin($this->table4, $this->table1.'.flow_of_classrecord', '=',  $this->table4.'.flow_of_classrecord')
-        ->where('PLC','1')
-        ->groupBy($this->table1.'.flow_of_classrecord')
-        ->get();
-        return $club;
+        // $club = DB::table($this->table1)
+        // ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
+        // ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
+        // ->leftJoin($this->table4, $this->table1.'.flow_of_classrecord', '=',  $this->table4.'.flow_of_classrecord')
+        // ->where('PLC','1')
+        // ->groupBy($this->table1.'.flow_of_classrecord')
+        // ->get();
+        // return $club;
         // 傳過去時要使用的變數名稱 變數
     }
 
     public function create()
     {
         //公開的
-        // $club=club_info::all();
 
-        return view('club.m-class_add');
+        return view('club.m-ach_add');
         // 傳過去時要使用的變數名稱 變數
     }
 
@@ -66,22 +64,13 @@ class ClubofclassrecordController extends Controller
         
     //    dd($request->all());
        $this->validate($request, [
-        'class_name' => 'required',
-        'class_teacher' => 'required',
-        'class_place' => 'required',
-        'class_contect' => 'required',
+        'name' => 'required',
+        'content' => 'required',
+        'population' => 'required',
+        'place' => 'required',
         'pic'=>'image|nullable'
     ]);
-    $record = new Clubclassrecord;
-    $record->flow_of_classrecord =$request->input('flow_of_classrecord');
-    $record->class_name=$request->input('class_name');
-    $record->class_teacher=$request->input('class_teacher');
-    $record->class_place=$request->input('class_place');
-    $record->class_contect=$request->input('class_contect');
-    $record->date=$request->input('date');
-    $record->PLC =$request->input('PLC');
-    $record->club_semester=$request->input('club_semester');
-    $record->save();
+
     if($request->hasFile('pic')){
         // Get filename with the extension
         $filenameWithExt = $request->file('pic')->getClientOriginalName();
@@ -92,17 +81,23 @@ class ClubofclassrecordController extends Controller
         // Filename to store
         $fileNameToStore= $filename.'_'.time().'.'.$extension;
         // Upload Image
-        $path = $request->file('pic')->storeAs('public/classrecord/', $fileNameToStore);
+        $path = $request->file('pic')->storeAs('public/activity/', $fileNameToStore);
     
     } else {
         $fileNameToStore = '';
     }
-    $classrecord_pic = new Classrecord_pic;
-    $classrecord_pic->flow_of_pic =$request->input('flow_of_pic');
-    $classrecord_pic->flow_of_classrecord =$request->input('flow_of_classrecord');
-    $classrecord_pic->pic =$fileNameToStore;
-    $classrecord_pic->save();
-    return redirect("clubOfclassrecord/$request->club_name")->with('success', '成功！');
+    $activity = new Clubactivity;
+    $activity->	flow_of_activity =$request->input('flow_of_activity');
+    $activity->population=$request->input('population');
+    $activity->	place=$request->input('place');
+    $activity->	name=$request->input('name');
+    $activity->content=$request->input('content');
+    $activity->date=$request->input('date');
+    $activity->PLC =$request->input('PLC');
+    $activity->club_semester=$request->input('club_semester');
+    $activity->pic =$fileNameToStore;
+    $activity->save();
+    return redirect("Clubactivity/$request->club_name")->with('success', '成功！');
 
 
     }
@@ -119,10 +114,9 @@ class ClubofclassrecordController extends Controller
         $club = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
-        ->leftJoin($this->table4, $this->table1.'.flow_of_classrecord', '=',  $this->table4.'.flow_of_classrecord')
         ->where('club_name',$id)
         ->get();
-        return view('club.m-class')->with('classrecord',$club);
+        return view('club.m-ach')->with('club',$club);
     }
 
         /**
@@ -134,7 +128,6 @@ class ClubofclassrecordController extends Controller
     public function show($id,$date)
     {
         //
-        
         $club = DB::table($this->table1)
         ->leftJoin($this->table2, $this->table1.'.club_semester', '=',  $this->table2.'.club_semester')
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
@@ -153,8 +146,8 @@ class ClubofclassrecordController extends Controller
     public function edit($id)
     {
       
-        $class = Clubclassrecord::find($id);
-        return view('club.m-class_edit')->with('class', $class);
+        $activity = Clubactivity::find($id);
+        return view('club.m-ach_edit')->with('activity', $activity);
         //  return $class;
     }
 
@@ -169,13 +162,13 @@ class ClubofclassrecordController extends Controller
     {
         //
         $this->validate($request, [
-            'class_name' => 'required',
-            'class_teacher' => 'required',
-            'class_place' => 'required',
-            'class_contect' => 'required',
+            'name' => 'required',
+            'content' => 'required',
+            'population' => 'required',
+            'place' => 'required',
             'pic'=>'image|nullable'
         ]);
-        $record =Clubclassrecord::where('flow_of_classrecord', '=', $id)->first();
+        $activity =Clubactivity::where('flow_of_activity', '=', $id)->first();
         if($request->hasFile('pic')){
             // Get filename with the extension
             $filenameWithExt = $request->file('pic')->getClientOriginalName();
@@ -192,17 +185,17 @@ class ClubofclassrecordController extends Controller
             $fileNameToStore = '';
         }     
 
-        $record->class_name=$request->input('class_name');
-        $record->class_teacher=$request->input('class_teacher');
-        $record->class_place=$request->input('class_place');
-        $record->class_contect=$request->input('class_contect');
-        $record->date=$request->input('date');
-        $record->PLC =$request->input('PLC');
-        $record->club_semester=$request->input('club_semester');
-        $record->save();
-
+        $activity->population=$request->input('population');
+        $activity->	place=$request->input('place');
+        $activity->	name=$request->input('name');
+        $activity->content=$request->input('content');
+        $activity->date=$request->input('date');
+        $activity->PLC =$request->input('PLC');
+        $activity->club_semester=$request->input('club_semester');
+        $activity->pic =$fileNameToStore;
+        $activity->save();
     
-        return redirect("clubOfclassrecord/$request->club_name")->with('success', '成功！');
+        return redirect("Clubactivity/$request->club_name")->with('success', '成功！');
     }
 
     /**
@@ -214,10 +207,9 @@ class ClubofclassrecordController extends Controller
     public function destroy(Request $request,$id)
     {
         //
-        $clubnew =Classrecord_pic::where('flow_of_classrecord', '=', $id)->first();
+        $clubnew =Clubactivity::where('flow_of_activity', '=', $id)->first();
         $clubnew->delete();
-        $clubnew =Clubclassrecord::where('flow_of_classrecord', '=', $id)->first();
-        $clubnew->delete();
-        return redirect("clubOfclassrecord/$request->club_name")->with('success', '成功！');
+
+        return redirect("Clubactivity/$request->club_name")->with('success', '成功！');
     }
 }

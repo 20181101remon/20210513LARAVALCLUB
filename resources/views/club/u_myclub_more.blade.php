@@ -35,7 +35,7 @@
     </div>
     <nav>
         <div class="nav nav-tabs bg-d " id="nav-tab" role="tablist">
-            <a class="nav-link" href="homepage.html">Home</a>
+            <a class="nav-link" href="/home">Home</a>
             <a class="nav-item nav-link" id="nav-news-tab" data-toggle="tab" href="#nav-news" role="tab"
                 aria-controls="nav-news" aria-selected="true">最新消息</a>
             <a class="nav-item nav-link" id="nav-calendar-tab" data-toggle="tab" href="#nav-calendar" role="tab"
@@ -61,7 +61,7 @@
                     <strong>標題</strong>
                     <hr>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-3 text-center">
                     <strong>發布日期</strong>
                     <hr>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="col-5 text-center">
                     <p>{{$n->news_title}}</p>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-3 text-center">
                     <span>{{$n->date}}</span>
                 </div>
                 <div class="col-4 text-center">
@@ -97,8 +97,8 @@
                             </button>
                         </div>
                     <div class="modal-body">
-                        <div>
-                            <p>{{$n->news_content}}</p>
+                        <div class="text-start">
+                            <p>{!!$n->news_content!!}</p>
                         </div>
                         <div class="image-3x4" style="background-image: url(../img/news_1.jpg);"></div>
                         </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="row d-flex">
+                                        <div class="row d-flex text-start">
                                             <p>社課日期：{{ $r -> date }}</p>
                                             <p>社課地點：{{ $r -> class_place }}</p>
                                             <p>授課導師：{{ $r -> class_teacher }}</p>
@@ -181,7 +181,7 @@
                                         </div>
                                         <div class="row d-flex">
                                             <div class="col-12">
-                                                <img class="m-img" src="../img/club.jpg">
+                                            <div class="image-3x4" style="background-image: url(../img/news_1.jpg);"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -198,41 +198,44 @@
         <!-- 即時反饋 -->
         <div class="tab-pane fade show" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab">
             <h5><strong>即時反饋</strong></h5>
-            @include('inc.messages')
-            {!! Form::open(['method' => 'POST','action' => 'CluboffeedbackController@store', 'enctype' => 'multipart/form-data']) !!}
-            <div class="form-group">
-                @csrf
-                {{Form::label('title', '反饋類型')}}
-                {{Form::radio('feedback_id', '1', true) }}
-                {{Form::label('feedback_id', '社課')}}
-                {{Form::radio('feedback_id', '2',false) }}
-                {{Form::label('feedback_id', '活動')}}
-                {{Form::radio('feedback_id', '3',false) }}
-                {{Form::label('feedback_id', '成果展')}}
-                {{Form::radio('feedback_id', '4',false) }}
-                {{Form::label('feedback_id', '其他')}}
+            <div>
+                <label for="exampleFormControlInput1" class="form-label">活動類型：</label>
+                <form role="form">
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row d-flex">
+                                <div class="col-3">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="class" name="type">社課
+                                    </label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="act" name="type">活動
+                                    </label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="ach" name="type">成果展
+                                    </label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="other" name="type">其他
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                {{Form::label('title', '標題')}}
-                {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
-
-                {{Form::label('body', '反饋內容')}}
-                {{Form::textarea('content', '', ['id' => 'summary-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
-                {{ Form::hidden('club_id', $c->club_id) }}
-                {{ Form::hidden('club_name', $c->club_name) }}
-                {{ Form::hidden('date',date('Y-m-d H:i:s'))}}
-                {{ Form::hidden('flow_of_feedback',Str::uuid()) }}
-            
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">建議：</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            {{-- <div class="form-group">
-                {{Form::file('cover_image')}}
-            </div> --}}
-            
-                <br>
-
-            {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-            {!! Form::close() !!}
-            
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-secondary bg-d c0">提交</button>
+            </div>
         </div>
         <!-- 活動成果 -->
         <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab">
@@ -271,7 +274,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <div class="row d-flex">
+                                        <div class="row d-flex text-start">
                                             <p>活動日期：{{ $a -> date }}</p>
                                             <p>活動地點：{{ $a -> activity_venue }}</p>
                                             <span style="padding-left: 12px;padding: right 12px;">
@@ -288,7 +291,7 @@
                                         </div>
                                         <div class="row d-flex">
                                             <div class="col-12">
-                                                <img class="m-img" src="../img/club.jpg">
+                                            <div class="image-3x4" style="background-image: url(../img/news_1.jpg);"></div>
                                             </div>
                                         </div>
                                     </div>

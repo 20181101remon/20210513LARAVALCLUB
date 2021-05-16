@@ -23,6 +23,15 @@ class IndexController extends Controller
     private $table8='club_news';
     private $table9='news_type';
     private $table10='news_attend_file';
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.

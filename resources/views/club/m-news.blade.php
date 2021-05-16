@@ -68,8 +68,6 @@
 
 
                         {{-- {!! Form::open(['method' => 'delete','action' => ['ClubofnewsController@destroy',$n->flow_of_news], 'class' => 'pull-right']) !!} --}}
-
-
                   <div class="modal fade c0" id="<?php echo $modal ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $modal."Title" ?>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content bg-d">
@@ -81,14 +79,13 @@
                         </div>
                         <div class="modal-body">
                           <div>
-                            {{$n->news_content}}
+                            {!!$n->news_content!!}
                           </div>
                           <div class="image-3x4" style="background-image: url(/storage/newpic/{{$n->news_pic}});"></div>
                           <!-- <img  style="width:100%" src="/storage/newpic/{{$n->news_pic}}"> -->
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary button-c" data-dismiss="modal">Close</button>
- 
                         </div>
                       
                       </div>
@@ -96,12 +93,12 @@
                   </div>
                 </div>
               </div>
-              @php
-                $mnum++
-              @endphp
-            @endforeach
-          @endif
         </div>
+                @php
+                  $mnum++
+                @endphp
+              @endforeach
+          @endif
       </div>
-
+    </div>
     @endsection

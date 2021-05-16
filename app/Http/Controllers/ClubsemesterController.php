@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 class ClubsemesterController extends Controller
 {
     private $table1='club_semester';
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *

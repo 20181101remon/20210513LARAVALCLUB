@@ -43,7 +43,6 @@
                 {{ Form::hidden('club_semester',Session::get('club_semester'))}}
                 {{ Form::hidden('club_name',Session::get('club_name'))}}
                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-                {{ Form::hidden('flow_of_pic',Str::uuid()) }}
              
 
             </div>

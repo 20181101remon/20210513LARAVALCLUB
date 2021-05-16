@@ -10,6 +10,17 @@ class ClubactivityapplyController extends Controller
     private $table1='activity_apply';
     private $table2='club_semester';
     private $table3='club_info';
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *

@@ -5,20 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class club_info extends Model
+class Clubplan extends Model
 {
     use HasFactory;
+   
     // Table Name
-    protected $table="club_info";
-
+    protected $table="club_planofsemester";
+    public $incrementing = false;
     // Primary key 
-    public  $primaryKey="club_id";
+    public  $primaryKey="flow_of_plan";
 
     // TimeStemp
     public $timestemps=true;
+
     protected function setUUID()
     {
-        $this->club_id= preg_replace('/\./', '', uniqid('bpm', true));
+        $this->club_planofsemester = preg_replace('/\./', '', uniqid('bpm', true));
     }
+
 
 }

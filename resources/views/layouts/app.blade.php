@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -55,6 +55,13 @@
         .div-square {
           position: relative !important;
         }
+
+        #combo>div{
+            overflow: hidden;
+            margin-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+}
       </style>
 </head>
 <body class="bg">
@@ -139,12 +146,12 @@
         <main class="py-4">
             <div class="container">
         
-                {{-- @include('inc.messages') --}}
+                @include('inc.messages')
             @yield('content')
         </div>
         </main>
     </div>
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   @include('club.footer')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
@@ -162,5 +169,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    
+            
+  
+    </body>
 </html>

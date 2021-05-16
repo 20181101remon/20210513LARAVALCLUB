@@ -4,12 +4,23 @@ namespace App\Http\Controllers;
 // use App\Models\club_info;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use App\Models\Clubplan;
 class ClubofplanController extends Controller
 {
     private $table1='club_planofsemester';
     private $table2='club_semester';
     private $table3='club_info';
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -34,8 +45,19 @@ class ClubofplanController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return  DB::table($this->table1)->insert($request->all());
+       
+        $this->validate($request, [
+            'activity_name' => 'required'
+        ]);
+
+        $activity = new Clubplan;
+        $activity->	flow_of_plan  =$request->input('flow_of_plan');
+        $activity->activity_name=$request->input('activity_name');
+        $activity->date=$request->input('date');
+        $activity->club_semester=$request->input('club_semester');
+        $activity->save();
+        return redirect("clubOfplan/$request->club_name")->with('success', '成功！');
+
     }
     /**
      * Display the specified resource.
@@ -51,7 +73,7 @@ class ClubofplanController extends Controller
         ->leftJoin($this->table3, $this->table2.'.club_id', '=',  $this->table3.'.club_id')
         ->where('club_name',$id)
         ->get();
-        return $club;
+        return view("club.m-plan")->with("club",$club);
     }
 
     /**
@@ -77,10 +99,12 @@ class ClubofplanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
-        $club=DB::table($this->table1)->where('flow_of_plan',$id)->delete();
-        return $club;
+        $clubnew =Clubplan::where('flow_of_plan', '=', $id)->first();
+        $clubnew->delete();
+
+        return redirect("clubOfplan/$request->club_name")->with('success', '成功！');
     }
 }

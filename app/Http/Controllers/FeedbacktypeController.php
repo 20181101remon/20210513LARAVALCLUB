@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 class FeedbacktypeController extends Controller
 {
     private $table1='feedback_type';
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

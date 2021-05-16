@@ -12,6 +12,15 @@ class NewsattendfileController extends Controller
     private $table2 = 'club_info';
     private $table3 = 'news_type';
     private $table4 = 'news_attend_file';
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

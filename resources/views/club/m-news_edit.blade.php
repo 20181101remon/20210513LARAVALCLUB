@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @include('inc.m_navbar')
+@include('inc.messages')
 @section('content')
+
     <div class="m-5">
         <h5><strong>社團消息</strong></h5>
         {!! Form::open(['method' => 'PUT','action' =>  ['ClubofnewsController@update',$news->flow_of_news], 'enctype' => 'multipart/form-data']) !!}

@@ -12,6 +12,16 @@ class ClubactivityresultsController extends Controller
     private $table3 = 'club_semester';
     private $table4 = 'club_info';
     private $table5 = 'activity_pic';
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +70,7 @@ class ClubactivityresultsController extends Controller
         ->groupBy($this->table1.'.flow_result_activity')
         ->where('club_name',$id)
         ->get();
-        return $club;
+        return view('club.m-ach')->with('club',$club);
     }
 
         /**
