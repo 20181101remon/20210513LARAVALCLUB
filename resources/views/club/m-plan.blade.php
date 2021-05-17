@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @include('inc.m_navbar')
+@include('inc.messages')
     <!-- body -->
     @section('content')
     <div class="my-3 mr-5 float-right">

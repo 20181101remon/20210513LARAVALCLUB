@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @include('inc.m_navbar')
+@include('inc.messages')
 @section('content')
 
     <div class="m-5">
